@@ -1,0 +1,65 @@
+/* ============================================================
+   80mm THERMAL RECEIPT (e.g. Xprinter / Epson TM / generic POS-80)
+   Paper width 80mm, printable area ~72mm. Black & white only.
+   ============================================================ */
+/* @page size is emitted per paper model by includes/thermal_layout.php */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e7eb; }
+
+.toolbar {
+  max-width: 100mm; margin: 12px auto 0; display: flex; gap: 8px; justify-content: center;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+.toolbar button, .toolbar a {
+  flex: 1; text-align: center; padding: 10px 8px; border-radius: 8px; border: 1px solid #0F6659;
+  background: #0F6659; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+}
+.toolbar select { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid #0F6659; font-size: 14px; background: #fff; }
+.toolbar a.alt { background: #fff; color: #0F6659; }
+.hint { max-width: 100mm; margin: 8px auto 0; font: 12px system-ui, sans-serif; color: #6b7280; text-align: center; }
+
+.receipt {
+  width: 72mm;                /* printable width on 80mm paper */
+  margin: 12px auto;
+  padding: 4mm 2mm 6mm;
+  background: #fff;
+  color: #000;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  line-height: 1.35;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+.receipt img.logo { display: block; margin: 0 auto 4px; max-width: 40mm; max-height: 18mm; object-fit: contain; filter: grayscale(1) contrast(1.6); }
+.receipt .center { text-align: center; }
+.receipt .title  { font-size: 15px; font-weight: 700; text-align: center; letter-spacing: .5px; }
+.receipt .sub    { text-align: center; font-size: 11px; }
+.receipt .sep    { border-top: 1px dashed #000; margin: 6px 0; height: 0; }
+.receipt .sep.solid { border-top-style: solid; }
+.receipt .row    { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+.receipt .row .l { flex: 1; min-width: 0; word-break: break-word; }
+.receipt .row .r { white-space: nowrap; text-align: right; }
+.receipt .bold   { font-weight: 700; }
+.receipt .big    { font-size: 15px; font-weight: 700; }
+.receipt .stamp  { text-align: center; font-weight: 700; font-size: 14px; border: 2px solid #000; padding: 2px 0; margin: 6px 0; letter-spacing: 1px; }
+.receipt .item   { margin-bottom: 3px; }
+.receipt .item .nm { word-break: break-word; }
+.receipt .muted  { font-size: 11px; }
+.receipt .cut    { text-align: center; font-size: 10px; margin-top: 8px; }
+
+@media print {
+  html, body { background: #fff !important; }
+  .toolbar, .hint { display: none !important; }
+  .receipt { margin: 0 auto; box-shadow: none; }
+}
+
+/* ---- Paper models ---- */
+.paper-80 .receipt { width: 72mm; }
+.paper-58 .receipt { width: 48mm; padding: 3mm 1mm 6mm; font-size: 11px; }
+.paper-58 .receipt .title { font-size: 13px; }
+.paper-58 .receipt .big, .paper-58 .receipt .stamp { font-size: 12px; }
+.paper-58 .receipt img.logo { max-width: 30mm; max-height: 14mm; }
+.paper-a4 .receipt { width: 150mm; padding: 12mm; font-family: system-ui, Arial, sans-serif; font-size: 14px; line-height: 1.5; }
+.paper-a4 .receipt .title { font-size: 20px; }
+.paper-a4 .receipt img.logo { max-width: 60mm; max-height: 28mm; }
+@media print { .paper-a4 .receipt { width: 100%; padding: 0; } }
